@@ -70,22 +70,16 @@ export function reducerApp(state = initialState, action){
       }
     }
 
-    case SUM_TOTAL:{
-      let total = 0
-      if(state.operations === []){
-        total = 0
-      } else {
-      state.operations.map(op => {
-        if(op.type === 'Income'){
-          total += op.amount
-        } else {
-          total -= op.amount
-        }
-      })
-      }
-      return{
-        ...state, 
-        operationsTotal: total
+    case SUM_TOTAL: {
+      let total = 0;
+      if (state.operations.length > 0) {
+        state.operations.map((op) => {
+          if (op.type === "Income") {
+            total += op.amount;
+          } else {
+            total -= op.amount;
+          }
+        });
       }
     }
 

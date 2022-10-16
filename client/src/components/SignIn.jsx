@@ -97,7 +97,7 @@ const SignIn = () => {
             <label className='py-2 font-medium'>Password:</label>
             <input name='password' onChange={handleChanges} className='p-3 rounded-md text-black' type="password" />
           </div>
-          <GoogleButton onClick={handleGoogleSignIn} className='mx-[210px] mt-4 mb-2' type='light'/>
+          <GoogleButton onClick={handleGoogleSignIn} className='mt-4 mb-2' type='light'/>
           <button className='w-full py-4 my-2'>Sign In</button>
           <Link to='/forget'><button className='w-full py-4 my-2'>Forget password?</button></Link>
         </form>

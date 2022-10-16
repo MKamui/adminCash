@@ -81,7 +81,7 @@ const CreateAccount = () => {
           <input name='password' onChange={handleChanges} className='p-3 rounded-md text-black' type="password" />
         </div>
         <button className='w-full py-4 mt-4 mb-2'>Create account</button>
-        <Link to='/card'><button className='w-full py-4 my-2'>Back SignIn</button></Link>
+        <Link to='/'><button className='w-full py-4 my-2'>Back SignIn</button></Link>
       </form>
     </div>
     </>

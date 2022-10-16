@@ -21,8 +21,8 @@ const Card = () => {
   }, [showActivities])
 
   useEffect(() => {
-    if(operations.length > 0)dispatch(sumTotal())
-  }, [operations, operationsTotal])
+    dispatch(sumTotal());
+  }, [operations, operationsTotal, dispatch]);
 
   const handleLogout = async () => {
     try {
@@ -43,7 +43,7 @@ const Card = () => {
   return (
     <>
     <NavBar/>
-    <div className="pt-[90px] text-blue-500">
+    <div className="pt-28 text-blue-500">
       <div className="container mx-auto max-w-2xl md:w-3/4">
         <div className="rounded-t-lg border-2 border-sky-600 p-4">
           <div className="mx-auto max-w-sm md:mx-0 md:w-full">
@@ -70,6 +70,7 @@ const Card = () => {
           </div>
           <h2 className='text-center font-bold text-lg text-white'>Financial History</h2>
           {showActivities ?
+          <>
           <table className="w-full">
             <thead>
               <tr className="text-xs font-semibold tracking-wide text-left uppercase border-b border-sky-600">
@@ -100,12 +101,13 @@ const Card = () => {
           )}
         </tbody>
       </table>
+      <div className='px-4 py-3 font-semibold flex'>
+      <p>Total:</p>
+      <p className='ml-4 text-white'>{operationsTotal != 0 ? "$" + operationsTotal : "No activities"}</p>
+      </div>
+      </>
       : (user?.email) && <button onClick={() => setShowActivities(true)} className='ml-[40%] px-3 py-3'>Show Activities</button> 
       }
-        <div className='px-4 py-3 font-semibold flex'>
-        <p>Total:</p>
-        <p className='ml-4 text-white'>${operationsTotal != 0 ? operationsTotal : "No activities"}</p>
-        </div>
           <hr className='border border-sky-600'/>
         </div>
       </div>
