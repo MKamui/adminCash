@@ -1,10 +1,11 @@
-import { GET_USER, GET_OPERATIONS, GET_OPERATION, POST_USER, GET_FILTERED_TYPE, RESTART_FILTER, RESTART_USER, GET_FILTERED_CATEGORY } from '../actions/actions'
+import { GET_USER, GET_OPERATIONS, GET_OPERATION, POST_USER, GET_FILTERED_TYPE, RESTART_FILTER, RESTART_USER, GET_FILTERED_CATEGORY, SUM_TOTAL } from '../actions/actions'
 
 const initialState = {
  user: {},
  allOperations: [],
  operations: [],
- operation: {}
+ operation: {},
+ operationsTotal: 0
 }
 
 export function reducerApp(state = initialState, action){
@@ -66,6 +67,25 @@ export function reducerApp(state = initialState, action){
         allOperations: [],
         operations: [],
         operation: {}
+      }
+    }
+
+    case SUM_TOTAL:{
+      let total = 0
+      if(state.operations === []){
+        total = 0
+      } else {
+      state.operations.map(op => {
+        if(op.type === 'Income'){
+          total += op.amount
+        } else {
+          total -= op.amount
+        }
+      })
+      }
+      return{
+        ...state, 
+        operationsTotal: total
       }
     }
 

@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 import Swal from "sweetalert2";
 import { UserAuth } from '../context/AuthContext'
-import { getOperations, getOperation, restartUser, deleteOperation, getFilteredType, getFilteredCategory } from '../reducer/actions/actions.js'
+import { getOperations, getOperation, restartUser, deleteOperation, getFilteredType, getFilteredCategory, sumTotal } from '../reducer/actions/actions.js'
 import NavBar from './NavBar';
 
 const Card = () => {
@@ -14,11 +14,15 @@ const Card = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const operations = useSelector(state => state.operations)
+  const operationsTotal = useSelector(state => state.operationsTotal)
 
   useEffect(() => {
     if(idUser !== undefined)dispatch(getOperations(idUser))
   }, [showActivities])
-  
+
+  useEffect(() => {
+    if(operations.length > 0)dispatch(sumTotal())
+  }, [operations, operationsTotal])
 
   const handleLogout = async () => {
     try {
@@ -35,8 +39,6 @@ const Card = () => {
         console.log(e.message)
     }
 }
-
-  const total = 0
 
   return (
     <>
@@ -102,7 +104,7 @@ const Card = () => {
       }
         <div className='px-4 py-3 font-semibold flex'>
         <p>Total:</p>
-        <p className='ml-4 text-white'>{total}</p>
+        <p className='ml-4 text-white'>${operationsTotal != 0 ? operationsTotal : "No activities"}</p>
         </div>
           <hr className='border border-sky-600'/>
         </div>

@@ -8,6 +8,7 @@ export const GET_FILTERED_TYPE = 'GET_FILTERED_TYPE'
 export const RESTART_FILTER = "RESTART_FILTER"
 export const RESTART_USER = "RESTART_USER"
 export const GET_FILTERED_CATEGORY = "GET_FILTERED_CATEGORY"
+export const SUM_TOTAL = "SUM_TOTAL"
 
 export function postUser(value) {
   return async function (dispatch) {
@@ -120,6 +121,14 @@ export function deleteOperation(id){
     await axios.delete(`http://localhost:3001/operation/specific/${id}`)
     return dispatch({
       type:"DELETE_OPERATION"
+    })
+  }
+}
+
+export function sumTotal(){
+  return function(dispatch){
+    return dispatch({
+      type: "SUM_TOTAL"
     })
   }
 }
